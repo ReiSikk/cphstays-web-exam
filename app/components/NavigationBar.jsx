@@ -6,16 +6,25 @@ import { useMediaQuery } from 'usehooks-ts'
 import BurgerMenu from './BurgerMenu';
 import { useRouter } from 'next/navigation'
 import { usePathname } from 'next/navigation'
+import { useSelectedLayoutSegments } from 'next/navigation';
 
 
 function NavigationBar() {
   const router = useRouter();
-  const { pathname, query } = router;
+ /*  const { pathname, query } = router; */
+  const segment = useSelectedLayoutSegments();
+  const pathname = usePathname();
+  console.log(pathname, "pathname");
+  const [activeLink, setActiveLink] = useState(false);
 
-  const isActive = (path) => {
+
+
+ /*  const isActive = (path) => {
     const params = new URLSearchParams(query);
     return params.get('page') === path;
-  };
+  }; */
+
+
 
 
   const matches = useMediaQuery("(max-width: 899px)");
@@ -31,7 +40,7 @@ function NavigationBar() {
            </Link>
          </div>
         <div className="nav-right">
-       <Link href='/' className={pathname === '/' ? 'active-link' : ''} >
+        <Link href='/' className={pathname === '/' ? 'active-link' : ''} >
           Home
         </Link>
        <Link href='/pages/apartments' className={pathname === '/pages/apartments' ? 'active-link' : ''}>
@@ -44,6 +53,7 @@ function NavigationBar() {
           Contact
         </Link>
           <Link id="primary-btn" className={pathname === '/pages/corphousing' ? 'active-link' : ''}  href="/pages/corphousing">Corporate housing</Link>
+
         </div>
         </>
 }

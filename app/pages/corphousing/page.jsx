@@ -24,7 +24,7 @@ function page() {
           <div className="hero-cta">
             <h3>Find your perfect apartment and send a request</h3>
             <div className="hero-cta-container">
-              <Link href="/apartments" className="secondary-btn">
+              <Link href="/pages/apartments" className="secondary-btn">
                 See apartments
               </Link>
             </div>
