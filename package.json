@@ -1,0 +1,28 @@
+{
+  "name": "cphstays-web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@formspree/react": "^2.4.1",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.13.1",
+    "@mui/styled-engine-sc": "^5.12.0",
+    "eslint": "8.40.0",
+    "eslint-config-next": "13.4.1",
+    "next": "13.4.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "styled-components": "^5.3.10",
+    "superstylin": "^2.3.0",
+    "uikit": "^3.16.17",
+    "usehooks-ts": "^2.9.1"
+  }
+}
