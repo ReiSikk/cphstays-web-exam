@@ -1704,10 +1704,17 @@ justify-self: center;
 }
 
 .amenities_rules {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 3rem;
-  margin: 2rem 0rem 5rem 0rem;
+  margin: 1.5rem 0rem 5rem 0rem;
+  background: #E9E9E9;
+  padding: 2.5rem 1.25rem;
+}
+@media only screen and (min-width:899px) {
+  .amenities_rules {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 .rules {
   padding: 1rem 1.5rem;
@@ -1776,6 +1783,8 @@ justify-self: center;
 .apt-info-left .small-label {
   padding-bottom: 0rem;
 }
+
+
 
 /* ?Single Apartment page ends here */
 

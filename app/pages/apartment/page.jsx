@@ -1,20 +1,63 @@
 "use client"
 
-import React from 'react'
+import React, { useRef, useState } from "react";
 import { useSearchParams, usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import ContactForm from '../../components/ContactForm';
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
 
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+
+
+// import required modules
+import { FreeMode, Navigation } from "swiper";
 
 
 function Apartmentpage({searchParams}) {
 
+
   return (
     <>
     <div className="single-apt-images">
+    <Swiper 
+    loop={true} 
+    spaceBetween={10} 
+    navigation={true}  
+     className="carousel"
+     style={{
+      "--swiper-navigation-color": "#fff",
+      "--swiper-pagination-color": "#fff",
+    }}
+    modules={[FreeMode, Navigation]}
+     >
+        <SwiperSlide key={"1"}>
       <Image src={searchParams.img} alt={searchParams.title} width={1200} height={800} />
+      </SwiperSlide>
+        <SwiperSlide key={"2"}>
+      <Image src={searchParams.img} alt={searchParams.title} width={1200} height={800} />
+      </SwiperSlide>
+        <SwiperSlide key={"3"}>
+      <Image src={searchParams.img} alt={searchParams.title} width={1200} height={800} />
+      </SwiperSlide>
+      </Swiper>
+ {/*      <Swiper  onSwiper={setThumbsSwiper}
+        spaceBetween={10}
+        slidesPerView={4}
+        freeMode={true}
+        watchSlidesProgress={true}
+        modules={[FreeMode, Navigation, Thumbs]}
+        className="mySwiper">
+
+          <SwiperSlide key={"4"}>
+          <Image src={searchParams.img} alt={searchParams.title} width={1200} height={800} />
+          </SwiperSlide>
+      </Swiper> */}
     </div>
     <section className='apt-info-wrapper'>
       <div className='apt-info-left'>
@@ -103,15 +146,14 @@ function Apartmentpage({searchParams}) {
           <li className='list-li-flex'><span><Image src="/images/check-icon.svg" width={28} height={28} alt="icon" /></span>Parking</li>
           <li className='list-li-flex'><span><Image src="/images/check-icon.svg" width={28} height={28} alt="icon" /></span>Pet friendly</li>
           <li className='list-li-flex'><span><Image src="/images/check-icon.svg" width={28} height={28} alt="icon" /></span>Bike garage</li>
+          <li className='list-li-flex'><span><Image src="/images/check-icon.svg" width={28} height={28} alt="icon" /></span>Sharing friendly</li>
+          <li className='list-li-flex'><span><Image src="/images/check-icon.svg" width={28} height={28} alt="icon" /></span>Furnished</li> 
         </ul>
       </div>
       <div className="rules">
         <h4>House rules</h4>
         <ul>
-          <li className='list-li-flex'><span><Image src="/images/check-icon.svg" width={28} height={28} alt="icon" /></span>Pets</li>
-          <li className='list-li-flex'><span><Image src="/images/check-icon.svg" width={28} height={28} alt="icon" /></span>Sharing friendly</li>
-          <li className='list-li-flex'><span><Image src="/images/check-icon.svg" width={28} height={28} alt="icon" /></span>Balcony/terrace</li>
-          <li className='list-li-flex'><span><Image src="/images/check-icon.svg" width={28} height={28} alt="icon" /></span>Furnished</li> 
+          <li className='list-li-flex'><span><Image src="/images/check-icon.svg" width={28} height={28} alt="icon" /></span>Pets allowed</li>
           <li className='list-li-flex'><span><Image src="/images/cross-icon.svg" width={28} height={28} alt="icon" /></span>No smoking</li>
           <li className='list-li-flex'><span><Image src="/images/cross-icon.svg" width={28} height={28} alt="icon" /></span>No parties</li>
           <li className='list-li-flex'><span><Image src="/images/cross-icon.svg" width={28} height={28} alt="icon" /></span>No loud music after 22</li>

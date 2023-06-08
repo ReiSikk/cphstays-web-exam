@@ -22,6 +22,7 @@
     "react-dom": "18.2.0",
     "styled-components": "^5.3.10",
     "superstylin": "^2.3.0",
+    "swiper": "^9.3.2",
     "uikit": "^3.16.17",
     "usehooks-ts": "^2.9.1"
   }
