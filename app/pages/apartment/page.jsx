@@ -20,6 +20,14 @@ import { FreeMode, Navigation } from "swiper";
 
 
 function Apartmentpage({searchParams}) {
+  const router = useRouter();
+
+  // Retrieve the query parameter 'images' from the URL
+ /*  const imagesParam = router.query.images;
+  const images = JSON.parse(imagesParam) || []; */
+
+
+ 
 
 
   return (
@@ -39,12 +47,11 @@ function Apartmentpage({searchParams}) {
         <SwiperSlide key={"1"}>
       <Image src={searchParams.img} alt={searchParams.title} width={1200} height={800} />
       </SwiperSlide>
-        <SwiperSlide key={"2"}>
-      <Image src={searchParams.img} alt={searchParams.title} width={1200} height={800} />
-      </SwiperSlide>
-        <SwiperSlide key={"3"}>
-      <Image src={searchParams.img} alt={searchParams.title} width={1200} height={800} />
-      </SwiperSlide>
+     {/*  {images && images.map((image, index) => (
+          <SwiperSlide key={index}>
+            <Image src={image} width={1200} height={800} alt={image?.alt ? image.alt : ""} className="carousel-img" />
+          </SwiperSlide>
+        ))} */}
       </Swiper>
  {/*      <Swiper  onSwiper={setThumbsSwiper}
         spaceBetween={10}

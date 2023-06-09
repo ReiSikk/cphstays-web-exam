@@ -2,9 +2,48 @@ import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { useEffect, useState } from "react";
 
 
-function ApartmentCard({apartmentLocation, apartmentRooms, apartmentPrice, apartmentSize, apartmentBeds, apartmentDistrict, apartmentPhotos, apartmentTitle, imgData, apartmentDescription}) {
+function ApartmentCard({apartmentLocation, apartmentRooms, apartmentPrice, apartmentSize, apartmentBeds, apartmentDistrict, apartmentPhotos, apartmentTitle, imgData, apartmentDescription, images}) {
+
+  const [aptImg, setAptImg] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://reisikk.dk/cph-stays-apt/wp-json/wp/v2/media?parent=70');
+        const jsonData = await response.json();
+  
+        // Extract the array of images and their source URLs
+        const images = jsonData.map(image => image.source_url);
+        console.log(images, "images");
+  
+        // Update the state with the fetched image URLs
+        setAptImg(images);
+      } catch (error) {
+        console.error('Error fetching image data:', error);
+      }
+    };
+  
+    fetchData();
+  }, []);
+  console.log(aptImg, "aprtImg");
+/* 
+  const handleNavigate = () => {
+    const imagesString = JSON.stringify(aptImg);
+    const searchParams = new URLSearchParams(router.query); // Get the existing query parameters
+    searchParams.set('images', imagesString);
+
+    
+    router.push({
+      pathname: '/pages/apartment',
+      search: searchParams.toString()
+    });
+  }; */
+  
+  
+  
 
 
   return (
@@ -22,10 +61,11 @@ function ApartmentCard({apartmentLocation, apartmentRooms, apartmentPrice, apart
             title: apartmentTitle,
             img: imgData,
             description: apartmentDescription,
+            images: images,
           }
         }}
     
-    /* onClick={handleClick} */>
+    /* onClick={handleNavigate} */>
    <div className="card">
         <div className="card_image">
           {" "}

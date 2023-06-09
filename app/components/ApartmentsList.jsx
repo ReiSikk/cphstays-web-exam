@@ -12,16 +12,21 @@ import Router from 'next/router';
 
 function ApartmentList (props) {     
   const [imgData, setImgData] = useState([]);
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
         const response = await fetch('https://reisikk.dk/cph-stays-apt/wp-json/wp/v2/apartment?_embed');
+        const imagesResponse = await fetch('https://reisikk.dk/cph-stays-apt/wp-json/wp/v2/apartmentimage?_embed');
         const jsonData = await response.json();
+        const jsonImages = await imagesResponse.json();
         setImgData(jsonData);
+        setImages(jsonImages);
     };
 
     fetchData();
   }, []);
+
 
     if (!props.availableApartments) {
         return <div>Loading...</div>;
@@ -56,6 +61,7 @@ function ApartmentList (props) {
                 apartmentTitle={apartment.title.rendered} 
                 apartmentDescription={apartment.apartment_description}
                 imgData={apartment._embedded["wp:featuredmedia"][0].media_details.sizes.full.source_url}
+                /* images={images[0]._links["wp:attachment"]} */
                />
                 </li>
               ))}
