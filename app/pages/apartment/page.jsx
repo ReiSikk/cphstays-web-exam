@@ -1,11 +1,13 @@
 "use client"
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useSearchParams, usePathname } from 'next/navigation';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import ContactForm from '../../components/ContactForm';
+import { useContext } from 'react';
+import { ImageContext } from '../../components/ImageContext';
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -20,13 +22,8 @@ import { FreeMode, Navigation } from "swiper";
 
 
 function Apartmentpage({searchParams}) {
-  const router = useRouter();
-
-  // Retrieve the query parameter 'images' from the URL
- /*  const imagesParam = router.query.images;
-  const images = JSON.parse(imagesParam) || []; */
-
-
+  const { imageUrls } = useContext(ImageContext);
+  console.log(imageUrls, "imageUrls in Apartmentpage");
  
 
 

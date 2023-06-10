@@ -3,11 +3,18 @@ import React from "react";
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react";
+import { useContext } from 'react';
+import { ImageContext } from "./ImageContext";
+
 
 
 function ApartmentCard({apartmentLocation, apartmentRooms, apartmentPrice, apartmentSize, apartmentBeds, apartmentDistrict, apartmentPhotos, apartmentTitle, imgData, apartmentDescription, images}) {
 
   const [aptImg, setAptImg] = useState([]);
+    ////trying out stuff
+    const { setImageUrls } = useContext(ImageContext);
+
+ 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,29 +28,24 @@ function ApartmentCard({apartmentLocation, apartmentRooms, apartmentPrice, apart
   
         // Update the state with the fetched image URLs
         setAptImg(images);
+        setImageUrls(images);
+        /* searchParams.set('images', imagesString); */
       } catch (error) {
         console.error('Error fetching image data:', error);
       }
     };
   
     fetchData();
-  }, []);
-  console.log(aptImg, "aprtImg");
-/* 
-  const handleNavigate = () => {
-    const imagesString = JSON.stringify(aptImg);
-    const searchParams = new URLSearchParams(router.query); // Get the existing query parameters
-    searchParams.set('images', imagesString);
+  }, [setImageUrls]);
+  console.log(aptImg, "images in ApartmentCard");
 
-    
-    router.push({
-      pathname: '/pages/apartment',
-      search: searchParams.toString()
-    });
-  }; */
-  
-  
-  
+  const handleNavigate = () => {
+    setImageUrls(imgageUrls);
+  };
+
+
+
+
 
 
   return (
@@ -65,7 +67,7 @@ function ApartmentCard({apartmentLocation, apartmentRooms, apartmentPrice, apart
           }
         }}
     
-    /* onClick={handleNavigate} */>
+    onClick={handleNavigate}>
    <div className="card">
         <div className="card_image">
           {" "}

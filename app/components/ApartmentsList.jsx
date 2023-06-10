@@ -2,10 +2,10 @@
 import React from 'react'
 import ApartmentCard from './ApartmentCard'
 import ErrorDiv from './ErrorDiv'
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import Router from 'next/router';
+import { useState, useEffect, useContext } from 'react';
+
+
+
 
 
 
@@ -13,6 +13,7 @@ import Router from 'next/router';
 function ApartmentList (props) {     
   const [imgData, setImgData] = useState([]);
   const [images, setImages] = useState([]);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,6 +23,8 @@ function ApartmentList (props) {
         const jsonImages = await imagesResponse.json();
         setImgData(jsonData);
         setImages(jsonImages);
+
+
     };
 
     fetchData();
