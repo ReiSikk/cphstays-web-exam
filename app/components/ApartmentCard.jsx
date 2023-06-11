@@ -5,45 +5,44 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react";
 import { useContext } from 'react';
 import { ImageContext } from "./ImageContext";
+import { UnarchiveTwoTone } from "@mui/icons-material";
 
 
 
-function ApartmentCard({apartmentLocation, apartmentRooms, apartmentPrice, apartmentSize, apartmentBeds, apartmentDistrict, apartmentPhotos, apartmentTitle, imgData, apartmentDescription, images}) {
+function ApartmentCard({apartmentLocation, apartmentRooms, apartmentPrice, apartmentSize, apartmentBeds, apartmentDistrict, apartmentPhotos, apartmentTitle, imgData, apartmentDescription, imagesId, uniqueId}) {
+
+     // Extract the ID value from the first item in the array
+  const imageId = imagesId?.id;
+  console.log(imageId, "imageId in apartmentCard");
+  console.log(uniqueId, "uniqueId in apartmentCard");
 
   const [aptImg, setAptImg] = useState([]);
     ////trying out stuff
-    const { setImageUrls } = useContext(ImageContext);
+    const  { setImageUrls }  = useContext(ImageContext);
 
- 
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('https://reisikk.dk/cph-stays-apt/wp-json/wp/v2/media?parent=70');
-        const jsonData = await response.json();
-  
-        // Extract the array of images and their source URLs
-        const images = jsonData.map(image => image.source_url);
-        console.log(images, "images");
-  
-        // Update the state with the fetched image URLs
-        setAptImg(images);
-        setImageUrls(images);
-        /* searchParams.set('images', imagesString); */
-      } catch (error) {
-        console.error('Error fetching image data:', error);
-      }
-    };
-  
-    fetchData();
-  }, [setImageUrls]);
-  console.log(aptImg, "images in ApartmentCard");
-
-  const handleNavigate = () => {
-    setImageUrls(imgageUrls);
-  };
-
-
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          /* const response = await fetch('https://reisikk.dk/cph-stays-apt/wp-json/wp/v2/media?parent=70'); */
+          const response = await fetch(`https://reisikk.dk/cph-stays-apt/wp-json/wp/v2/media?parent=${imageId}`);
+         /*   const response = await fetch(`https://reisikk.dk/cph-stays-apt/wp-json/wp/v2/apartment/${uniqueId}?_embed`);  */
+          const jsonData = await response.json();
+    
+          // Extract the array of images and their source URLs
+          const images = jsonData.map(image => image.source_url);
+          console.log(images, "images in apartmendCard");
+    
+          // Update the state with the fetched image URLs
+          setAptImg(images);
+          setImageUrls(images);
+          /* searchParams.set('images', imagesString); */
+        } catch (error) {
+          console.error('Error fetching image data:', error);
+        }
+      };
+    
+      fetchData();
+    }, [setImageUrls, imageId]);
 
 
 
@@ -53,6 +52,7 @@ function ApartmentCard({apartmentLocation, apartmentRooms, apartmentPrice, apart
     <Link  href={{
           pathname: '/pages/apartment',
           query: {
+            id: imageId,
             address: apartmentLocation,
             rooms: apartmentRooms,
             price: apartmentPrice,
@@ -63,11 +63,12 @@ function ApartmentCard({apartmentLocation, apartmentRooms, apartmentPrice, apart
             title: apartmentTitle,
             img: imgData,
             description: apartmentDescription,
-            images: images,
+        images: JSON.stringify(aptImg),
+        imagesId: imageId
+
           }
         }}
-    
-    onClick={handleNavigate}>
+    /* onClick={handleNavigate} */>
    <div className="card">
         <div className="card_image">
           {" "}

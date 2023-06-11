@@ -7,6 +7,8 @@ import Link from 'next/link';
 import ContactForm from '../../components/ContactForm';
 import { useContext } from 'react';
 import { ImageContext } from '../../components/ImageContext';
+import { useRouter } from 'next/navigation';
+
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -22,9 +24,9 @@ import { FreeMode, Navigation } from "swiper";
 
 
 function Apartmentpage({searchParams}) {
-  const { imageUrls } = useContext(ImageContext);
-  console.log(imageUrls, "imageUrls in Apartmentpage");
- 
+  const { images } = searchParams;
+  console.log(images, "images in apartment page");
+  const imageUrls = JSON.parse(images);
 
 
   return (
@@ -41,14 +43,15 @@ function Apartmentpage({searchParams}) {
     }}
     modules={[FreeMode, Navigation]}
      >
-        <SwiperSlide key={"1"}>
+   {imageUrls.map((imageUrl, index) => (
+        <SwiperSlide key={index}>
+          <Image src={imageUrl} alt={`Image ${index}`} width={1200} height={800} />
+        </SwiperSlide>
+      ))}
+     {/*    <SwiperSlide key={"1"}>
       <Image src={searchParams.img} alt={searchParams.title} width={1200} height={800} />
-      </SwiperSlide>
-     {/*  {images && images.map((image, index) => (
-          <SwiperSlide key={index}>
-            <Image src={image} width={1200} height={800} alt={image?.alt ? image.alt : ""} className="carousel-img" />
-          </SwiperSlide>
-        ))} */}
+      </SwiperSlide> */}
+
       </Swiper>
  {/*      <Swiper  onSwiper={setThumbsSwiper}
         spaceBetween={10}

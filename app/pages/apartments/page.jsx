@@ -73,7 +73,7 @@ function Page() {
 
   return (
 
-    <ImageProvider>
+    <>
       {/* Your JSX content here */}
       <div className="apartments-list-wrapper">
         <span className="small-label">Fully serviced apartments</span>
@@ -88,7 +88,7 @@ function Page() {
         searchChanged={searchChanged}
       />
       <ApartmentsList  filter={filter} availableApartments={availableApartments} apartments={apartments} />
-      </ImageProvider>
+      </>
   );
 }
 
