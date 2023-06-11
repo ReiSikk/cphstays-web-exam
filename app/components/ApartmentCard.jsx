@@ -2,9 +2,49 @@ import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { useEffect, useState } from "react";
+import { useContext } from 'react';
+import { ImageContext } from "./ImageContext";
 
 
-function ApartmentCard({apartmentLocation, apartmentRooms, apartmentPrice, apartmentSize, apartmentBeds, apartmentDistrict, apartmentPhotos, apartmentTitle, imgData, apartmentDescription}) {
+
+
+function ApartmentCard({apartmentLocation, apartmentRooms, apartmentPrice, apartmentSize, apartmentBeds, apartmentDistrict, apartmentPhotos, apartmentTitle, imgData, apartmentDescription, imagesId, uniqueId}) {
+
+     // Extract the ID value from the first item in the array
+  const imageId = imagesId?.id;
+  console.log(imageId, "imageId in apartmentCard");
+  console.log(uniqueId, "uniqueId in apartmentCard");
+
+  const [aptImg, setAptImg] = useState([]);
+    ////trying out stuff
+    const  { setImageUrls }  = useContext(ImageContext);
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+         /*  const response = await fetch('https://reisikk.dk/cph-stays-apt/wp-json/wp/v2/media?parent=70'); */
+         /*   const response = await fetch(`https://reisikk.dk/cph-stays-apt/wp-json/wp/v2/apartment/${uniqueId}?_embed`);  */
+         const response = await fetch(`https://reisikk.dk/cph-stays-apt/wp-json/wp/v2/media?parent=${uniqueId}`)
+          const jsonData = await response.json();
+    
+          // Extract the array of images and their source URLs
+          const images = jsonData.map(image => image.source_url);
+
+    
+          // Update the state with the fetched image URLs
+          setAptImg(images);
+          setImageUrls(images);
+          /* searchParams.set('images', imagesString); */
+        } catch (error) {
+          console.error('Error fetching image data:', error);
+        }
+      };
+    
+      fetchData();
+    }, [setImageUrls, uniqueId]);
+
+
 
 
   return (
@@ -12,6 +52,7 @@ function ApartmentCard({apartmentLocation, apartmentRooms, apartmentPrice, apart
     <Link  href={{
           pathname: '/pages/apartment',
           query: {
+            id: imageId,
             address: apartmentLocation,
             rooms: apartmentRooms,
             price: apartmentPrice,
@@ -22,10 +63,12 @@ function ApartmentCard({apartmentLocation, apartmentRooms, apartmentPrice, apart
             title: apartmentTitle,
             img: imgData,
             description: apartmentDescription,
+        images: JSON.stringify(aptImg),
+        imagesId: imageId
+
           }
         }}
-    
-    /* onClick={handleClick} */>
+    /* onClick={handleNavigate} */>
    <div className="card">
         <div className="card_image">
           {" "}

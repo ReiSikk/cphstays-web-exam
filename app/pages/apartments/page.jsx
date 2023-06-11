@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import ApartmentsList from "../../components/ApartmentsList";
 import Filters from "../../components/Filters";
+import { ImageProvider } from "../../components/ImageContext";
 
 
 function Page() {
@@ -71,6 +72,7 @@ function Page() {
   
 
   return (
+
     <>
       {/* Your JSX content here */}
       <div className="apartments-list-wrapper">
@@ -86,7 +88,7 @@ function Page() {
         searchChanged={searchChanged}
       />
       <ApartmentsList  filter={filter} availableApartments={availableApartments} apartments={apartments} />
-    </>
+      </>
   );
 }
 
