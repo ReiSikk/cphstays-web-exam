@@ -5,7 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react";
 import { useContext } from 'react';
 import { ImageContext } from "./ImageContext";
-import { UnarchiveTwoTone } from "@mui/icons-material";
+
 
 
 
@@ -23,14 +23,14 @@ function ApartmentCard({apartmentLocation, apartmentRooms, apartmentPrice, apart
     useEffect(() => {
       const fetchData = async () => {
         try {
-          /* const response = await fetch('https://reisikk.dk/cph-stays-apt/wp-json/wp/v2/media?parent=70'); */
-          const response = await fetch(`https://reisikk.dk/cph-stays-apt/wp-json/wp/v2/media?parent=${imageId}`);
+         /*  const response = await fetch('https://reisikk.dk/cph-stays-apt/wp-json/wp/v2/media?parent=70'); */
          /*   const response = await fetch(`https://reisikk.dk/cph-stays-apt/wp-json/wp/v2/apartment/${uniqueId}?_embed`);  */
+         const response = await fetch(`https://reisikk.dk/cph-stays-apt/wp-json/wp/v2/media?parent=${uniqueId}`)
           const jsonData = await response.json();
     
           // Extract the array of images and their source URLs
           const images = jsonData.map(image => image.source_url);
-          console.log(images, "images in apartmendCard");
+
     
           // Update the state with the fetched image URLs
           setAptImg(images);
@@ -42,7 +42,7 @@ function ApartmentCard({apartmentLocation, apartmentRooms, apartmentPrice, apart
       };
     
       fetchData();
-    }, [setImageUrls, imageId]);
+    }, [setImageUrls, uniqueId]);
 
 
 

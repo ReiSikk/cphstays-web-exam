@@ -34,7 +34,6 @@ function ApartmentList (props) {
   }, []);
 
 
-  console.log(props.availableApartments, "props.availableApartments in ApartmentList");
 
     if (!props.availableApartments) {
         return <div>Loading...</div>;

@@ -25,8 +25,8 @@ import { FreeMode, Navigation } from "swiper";
 
 function Apartmentpage({searchParams}) {
   const { images } = searchParams;
-  console.log(images, "images in apartment page");
   const imageUrls = JSON.parse(images);
+
 
 
   return (
