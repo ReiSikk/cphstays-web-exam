@@ -1686,6 +1686,7 @@ justify-self: center;
 }
 .apt-details-wrapper {
   flex-grow: 1;
+  max-width: 800px;
   padding: 1rem 1.5rem;
   background-color: var(--color-primary);
   border-radius: 8px;
@@ -1713,7 +1714,7 @@ justify-self: center;
 }
 @media only screen and (min-width:899px) {
   .amenities_rules {
-    grid-template-columns: 1fr 1fr;
+    display: flex;
   }
 }
 .rules {
@@ -1728,10 +1729,12 @@ justify-self: center;
 }
 @media only screen and (min-width:1200px) {
   .rules, .amenities {
-    max-width: 600px;
+    max-width: 800px;
+    align-self: center;
   }
   .amenities_rules {
     justify-content: space-between;
+    padding: 2.75rem 2.25rem;
   }
 }
 .rules ul {
